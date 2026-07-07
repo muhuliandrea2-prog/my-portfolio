@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Muhuli | Portfolio</title>
+    <style>
+        /* Modern Dark Theme & Typography Variables */
+        :root {
+            --bg-color: #0B1120;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --primary-accent: #38BDF8; 
+            --primary-accent-hover: #0EA5E9;
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Enables smooth scrolling when clicking nav links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px;
+            
+            /* Live Wallpaper Setup */
+            background-image: url('WhatsApp Image 2026-07-07 at 4.35.19 PM.jpeg');
+            background-color: var(--bg-color);
+            background-size: 130% 130%; 
+            background-attachment: fixed;
+            background-position: center;
+            animation: skyPan 60s ease-in-out infinite;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes skyPan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes auroraShift {
+            0% { background-position: 0% 50%; opacity: 0.2; }
+            50% { background-position: 100% 50%; opacity: 0.5; }
+            100% { background-position: 0% 50%; opacity: 0.2; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Background Overlays */
+        .aurora-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(45deg, rgba(56, 189, 248, 0.2), rgba(15, 23, 42, 0.6), rgba(45, 212, 191, 0.1));
+            background-size: 300% 300%;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 0;
+            animation: auroraShift 20s ease-in-out infinite;
+        }
+
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 1);
+            opacity: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, #fff, transparent);
+        }
+
+        .star-1 { top: 15%; right: -10%; animation: shoot 18s linear infinite; animation-delay: 2s; }
+        .star-2 { top: 35%; right: -20%; animation: shoot 24s linear infinite; animation-delay: 8s; }
+        .star-3 { top: 10%; right: -5%; animation: shoot 20s linear infinite; animation-delay: 14s; }
+
+        @keyframes shoot {
+            0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
+            2% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
+            100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
+        }
+
+        /* Layout Container */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(11, 17, 32, 0.9) 0%, rgba(11, 17, 32, 0) 100%);
+            padding: 1.5rem 0 3rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-accent);
+            border: 1px solid var(--primary-accent);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 350px 300px;
+            gap: 3rem;
+            align-items: center;
+            min-height: 80vh;
+            margin-bottom: 5rem;
+        }
+
+        .location-tag {
+            font-size: 0.8rem;
+            color: var(--primary-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .location-tag::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background-color: var(--primary-accent);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--primary-accent);
+        }
+
+        .hero h3 {
+            font-size: 1.2rem;
+            color: #E2E8F0;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero p.bio {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            max-width: 90%;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Added Contact Details Block */
+        .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            border-left: 2px solid var(--primary-accent);
+            padding-left: 1.2rem;
+        }
+
+        .contact-block a, .contact-block span {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .contact-block a:hover {
+            color: var(--primary-accent);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            color: #0B1120;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-accent-hover);
+        }
+
+        .hero-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateX(-10px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .stat-card h4 {
+            font-size: 1.8rem;
+            color: var(--primary-accent);
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Content Sections (About, Certs, Education) */
+        .content-section {
+            padding: 5rem 0;
+            scroll-margin-top: 80px; 
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .section-header span {
+            color: var(--primary-accent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .glass-panel h3 {
+            color: var(--primary-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .glass-panel p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Tags */
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .skills-list li {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary-accent);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skills-list li:hover {
+            background: var(--primary-accent);
+            color: #0B1120;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .hero { grid-template-columns: 1fr 300px; gap: 2rem; }
+            .hero-center { display: none; }
+        }
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .location-tag { justify-content: center; }
+            .location-tag::before { display: none; }
+            .hero p.bio { margin: 0 auto 1.5rem auto; }
+            .contact-block { align-items: center; border-left: none; padding-left: 0; }
+            .action-buttons { justify-content: center; }
+            .nav-links { display: none; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlays -->
+    <div class="aurora-overlay"></div>
+    <div class="night-sky">
+        <div class="shooting-star star-1"></div>
+        <div class="shooting-star star-2"></div>
+        <div class="shooting-star star-3"></div>
+    </div>
+
+    <div class="app-container">
+        
+        <!-- Navigation Bar -->
+        <nav>
+            <div class="logo">Andrea<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+            <a href="mailto:u25511123@tuks.co.za" class="btn-outline">Get in touch</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <div class="hero-left">
+                <div class="location-tag">PRETORIA, SA • AVAILABLE FOR COLLABORATION</div>
+                <h1>Andrea <br><span>Muhuli</span></h1>
+                <h3>BSc Mathematical Statistics Student & Data Science Enthusiast</h3>
+                <p class="bio">
+                    Dedicated and technically proficient student at the University of Pretoria with practical experience in data handling (Python, R, Excel). Deeply passionate about analytical modeling, problem-solving, and community leadership through academic mentorship.
+                </p>
+                
+                <!-- Re-added Contact Details block seamlessly blending into the design -->
+                <div class="contact-block">
+                    <a href="mailto:u25511123@tuks.co.za">✉️ u25511123@tuks.co.za</a>
+                    <span>📱 069 171 9467</span>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="#skills" class="btn-primary">View Skills ↓</a>
+                </div>
+            </div>
+
+            <div class="hero-center">
+                <img src="WhatsApp Image 2026-07-07 at 3.39.52 PM.jpeg" alt="Andrea Muhuli" class="profile-img">
+            </div>
+
+            <div class="hero-right">
+                <div class="stat-card">
+                    <h4>2nd Year</h4>
+                    <p>BSc Mathematical Statistics<br>University of Pretoria</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Mentor</h4>
+                    <p>
+                        TuksVillage Mentor<br>
+                        STARS Mentorship Sub-committee<br>
+                        Mastercard Foundation Scholar
+                    </p>
+                </div>
+                <div class="stat-card">
+                    <h4>Leader</h4>
+                    <p>For Youth By Youth<br>2026 Cohort Member</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- About Section -->
+        <section id="about" class="content-section">
+            <h2 class="section-header">About <span>Me</span></h2>
+            <div class="glass-panel">
+                <p>I am a dedicated and technically proficient BSc Mathematical Statistics student at the University of Pretoria. I am highly computer literate with practical experience in data handling, including Python, R, and Excel modeling. As a Data Science Enthusiast, I am deeply passionate about machine learning and analytical modeling.</p>
+                <p>Beyond the classroom, I am committed to community and academic leadership. I actively serve as an academic mentor within the TuksVillage residence, the STARS Mentorship Programme sub-committee, and as a Mastercard Foundation Scholar & Mentor. Reliable and disciplined, I bring a strong analytical mindset and problem-solving capabilities to every project I undertake.</p>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="content-section">
+            <h2 class="section-header">Licenses & <span>Certifications</span></h2>
+            <div class="grid-2">
+                <div class="glass-panel">
+                    <h3>Intermediate Python for Data Analysis</h3>
+                    <p><strong>Arizona State University</strong><br><em>Issued Jun 2026</em></p>
+                    <p style="font-size: 0.9rem; margin-bottom: 0; color: #CBD5E1;">Skills: Data Preparation, Data Visualization, Pandas, NumPy</p>
+                </div>
+                <div class="glass-panel">
+                    <h3>Basic Python Workshop</h3>
+                    <p><strong>Arizona State University</strong><br><em>Issued Jun 2026</em></p>
+                    <p style="font-size: 0.9rem; margin-bottom: 0; color: #CBD5E1;">Skills: Python (Programming Language), Data Analysis</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="content-section">
+            <h2 class="section-header">Technical <span>Skills</span></h2>
+            <div class="grid-2">
+                <div class="glass-panel">
+                    <h3>Data Science & Software</h3>
+                    <ul class="skills-list">
+                        <li>Python</li>
+                        <li>R (Programming Language)</li>
+                        <li>Machine Learning</li>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Data Visualization</li>
+                        <li>Microsoft Excel & VBA</li>
+                    </ul>
+                </div>
+                <div class="glass-panel">
+                    <h3>Core Competencies</h3>
+                    <ul class="skills-list">
+                        <li>Analytical Skills</li>
+                        <li>Problem-solving</li>
+                        <li>Statistical Modeling</li>
+                        <li>Time Management</li>
+                        <li>Team Leadership</li>
+                        <li>Academic Mentorship</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="content-section">
+            <h2 class="section-header">Education <span>Background</span></h2>
+            <div class="grid-2">
+                <div class="glass-panel">
+                    <h3>University of Pretoria</h3>
+                    <!-- Updated year to 2025 and 2026 -->
+                    <p><strong>BSc Mathematical Statistics</strong><br>
+                    (2025 - Present)<br>
+                    <em>Moving to Second Year in 2026</em></p>
+                    <p style="font-size: 0.95rem; margin-top: 1rem;"><strong>Key Modules:</strong><br>
+                    - Mathematical Statistics (WST 111/121)<br>
+                    - Calculus (WTW 114/124)<br>
+                    - Numerical Analysis (WTW 123)<br>
+                    - Actuarial Mathematics (IAS 111/121)</p>
+                </div>
+                <div class="glass-panel">
+                    <h3>Overport Secondary School</h3>
+                    <!-- Updated Bachelor's Pass wording -->
+                    <p><strong>National Senior Certificate (NSC)</strong><br>
+                    (2023)<br>
+                    <em>Bachelor's Pass with distinctions</em></p>
+                    <p style="font-size: 0.95rem; margin-top: 1rem;"><strong>Subjects included:</strong> <br>
+                    Geography, Life Sciences, Physical Sciences, Mathematics, Tourism, English HL, isiZulu FAL, Life Orientation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Andrea Muhuli. All rights reserved. | References available upon request.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
